@@ -1,0 +1,60 @@
+---
+title: "Untitled"
+author: "谭昕煜"
+date: "2021/3/21"
+output: html_document
+---
+
+```{r setup, include=TRUE}
+library("knitr")
+library("devtools")
+#devtools::install_github("plotly/R-api")
+
+# Load Plot.ly
+library(plotly)
+#response = signup (username = 'tan', email= '2399794167@qq.com')
+#p <- plotly(username = "tanxinyu", key = "ua4WmUbui1S6Rzhf3oyZ")
+#Sys.setenv("plotly_username"="tanxinyu")
+# plotly_api_key在个人设置页面的左下角的api keys中
+#Sys.setenv("plotly_api_key"="ua4WmUbui1S6Rzhf3oyZ")
+
+# Create Dummy Data
+x <- seq.Date(from = as.Date("2014-05-01"), to = as.Date("2014-05-20"), by = "day")
+x <- as.character(as.Date(x, format = "%Y%m%d"), "%Y-%m-%d %H:%M:%S")
+y1 <- c(15000, 20000, 25000, 22000, 30000, 32000, 29000, 30000, 26000, 29000, 
+    15000, 20000, 25000, 22000, 30000, 32000, 29000, 30000, 26000, 29000)
+y2 <- c(25000, 25000, 25000, 25000, 25000, 25000, 25000, 25000, 25000, 25000, 
+    25000, 25000, 25000, 25000, 25000, 25000, 25000, 25000, 25000, 25000)
+
+# Build Plotly Traces From Dummy Data
+revenue <- list(x = x, y = y1, type = "bar", name = "Revenue")
+target <- list(x = x, y = y2, type = "scatter", name = "Target")
+
+# Build Data Frame
+df <- data.frame(x, y1, y2)
+df$day <- seq(from = 1, to = 20, by = 1)
+colnames(df) <- c("date", "revenue", "target", "day")
+
+# Melt Data
+library(reshape2)
+df$date <- NULL
+df.l <- melt(df, id.vars = c("day"))
+colnames(df.l) <- c("day", "segment", "revenue")
+
+# Load ggplot2 package
+library(ggplot2)
+
+# Build Plot
+plot <- ggplot(df.l, aes(day, revenue, group = segment, color = segment)) + 
+    geom_line()
+
+# Show Plot
+plot
+ggplotly(plot)
+
+```
+
+## R Markdown
+
+
+

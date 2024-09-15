@@ -1,0 +1,138 @@
+-------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  E:\STATA_IOV\IOV.log
+  log type:  text
+ opened on:  12 Sep 2021, 10:32:32
+
+. 
+end of do-file
+
+. do "C:\Users\TANXIN~1\AppData\Local\Temp\STD1304_000000.tmp"
+
+. regress drivingscore ranking alert  totalm Speed_KMH rapid_acc rapid_deacc sh
+> arp_turn fatigdriving nightdriving app_usage , robust
+
+Linear regression                               Number of obs     =     11,187
+                                                F(10, 11176)      =    1690.40
+                                                Prob > F          =     0.0000
+                                                R-squared         =     0.5931
+                                                Root MSE          =     16.608
+
+------------------------------------------------------------------------------
+             |               Robust
+drivingscore |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+     ranking |   3.339604   .3387969     9.86   0.000     2.675502    4.003705
+       alert |   2.212971   .3349513     6.61   0.000     1.556407    2.869535
+      totalm |  -.0000858   5.88e-06   -14.59   0.000    -.0000973   -.0000743
+   Speed_KMH |  -.1305533   .0310148    -4.21   0.000    -.1913477   -.0697588
+   rapid_acc |  -.0303529   .0024892   -12.19   0.000    -.0352321   -.0254736
+ rapid_deacc |  -.0372792   .0023418   -15.92   0.000    -.0418695   -.0326889
+  sharp_turn |  -.0139357   .0013175   -10.58   0.000    -.0165182   -.0113532
+fatigdriving |  -9.952325    .187125   -53.19   0.000    -10.31912   -9.585527
+nightdriving |  -1.153214   .0493774   -23.36   0.000    -1.250002   -1.056425
+   app_usage |  -1.923015   .6440136    -2.99   0.003    -3.185395   -.6606351
+       _cons |   82.08085   .9594629    85.55   0.000     80.20013    83.96156
+------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. do "C:\Users\TANXIN~1\AppData\Local\Temp\STD1304_000000.tmp"
+
+. asdoc regress drivingscore ranking alert  totalm Speed_KMH rapid_acc rapid_de
+> acc sharp_turn fatigdriving nightdriving app_usage , robust
+command asdoc is unrecognized
+r(199);
+
+end of do-file
+
+r(199);
+
+. help asdoc
+
+. findit asdoc
+
+. asdoc
+No command found
+
+. do "C:\Users\TANXIN~1\AppData\Local\Temp\STD1304_000000.tmp"
+
+. asdoc regress drivingscore ranking alert  totalm Speed_KMH rapid_acc rapid_de
+> acc sharp_turn fatigdriving nightdriving app_usage , robust
+
+Linear regression                               Number of obs     =     11,187
+                                                F(10, 11176)      =    1690.40
+                                                Prob > F          =     0.0000
+                                                R-squared         =     0.5931
+                                                Root MSE          =     16.608
+
+------------------------------------------------------------------------------
+             |               Robust
+drivingscore |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+     ranking |   3.339604   .3387969     9.86   0.000     2.675502    4.003705
+       alert |   2.212971   .3349513     6.61   0.000     1.556407    2.869535
+      totalm |  -.0000858   5.88e-06   -14.59   0.000    -.0000973   -.0000743
+   Speed_KMH |  -.1305533   .0310148    -4.21   0.000    -.1913477   -.0697588
+   rapid_acc |  -.0303529   .0024892   -12.19   0.000    -.0352321   -.0254736
+ rapid_deacc |  -.0372792   .0023418   -15.92   0.000    -.0418695   -.0326889
+  sharp_turn |  -.0139357   .0013175   -10.58   0.000    -.0165182   -.0113532
+fatigdriving |  -9.952325    .187125   -53.19   0.000    -10.31912   -9.585527
+nightdriving |  -1.153214   .0493774   -23.36   0.000    -1.250002   -1.056425
+   app_usage |  -1.923015   .6440136    -2.99   0.003    -3.185395   -.6606351
+       _cons |   82.08085   .9594629    85.55   0.000     80.20013    83.96156
+------------------------------------------------------------------------------
+(note: file Myfile.doc not found)
+Click to Open File:  Myfile.doc
+
+. 
+end of do-file
+
+. do "C:\Users\TANXIN~1\AppData\Local\Temp\STD1304_000000.tmp"
+
+. asdoc regress drivingscore ranking alert age gender accident drivingexp gcons
+>  totalm Speed_KMH rapid_acc rapid_deacc sharp_turn fatigdriving nightdriving 
+> app_usage , robust
+
+Linear regression                               Number of obs     =      6,993
+                                                F(15, 6977)       =     552.98
+                                                Prob > F          =     0.0000
+                                                R-squared         =     0.5539
+                                                Root MSE          =     14.176
+
+------------------------------------------------------------------------------
+             |               Robust
+drivingscore |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+     ranking |   .3056983   .4176007     0.73   0.464     -.512926    1.124323
+       alert |   .1521831   .3710628     0.41   0.682    -.5752128     .879579
+         age |  -.0343025   .0325354    -1.05   0.292    -.0980819    .0294769
+      gender |   2.386824   .6376597     3.74   0.000     1.136817    3.636831
+    accident |  -1.297761   .3903241    -3.32   0.001    -2.062915   -.5326076
+  drivingexp |   -.085139    .048653    -1.75   0.080    -.1805136    .0102356
+       gcons |   .0799874   .0195902     4.08   0.000     .0415847    .1183902
+      totalm |  -.0000364   7.04e-06    -5.16   0.000    -.0000502   -.0000226
+   Speed_KMH |   .0982591   .0544377     1.80   0.071    -.0084554    .2049736
+   rapid_acc |   -.026556   .0024016   -11.06   0.000    -.0312639    -.021848
+ rapid_deacc |  -.0374228   .0024873   -15.05   0.000    -.0422987   -.0325468
+  sharp_turn |  -.0146239   .0013633   -10.73   0.000    -.0172963   -.0119515
+fatigdriving |  -8.816613   .2161982   -40.78   0.000    -9.240428   -8.392799
+nightdriving |   -1.16681   .0633085   -18.43   0.000    -1.290914   -1.042706
+   app_usage |   .3558633   .6255467     0.57   0.569    -.8703984    1.582125
+       _cons |   72.59031   2.133729    34.02   0.000     68.40755    76.77307
+------------------------------------------------------------------------------
+(note: file Myfile.doc not found)
+Click to Open File:  Myfile.doc
+
+. 
+end of do-file
+
+. do "C:\Users\TANXIN~1\AppData\Local\Temp\STD1304_000000.tmp"
+
+. log close
+      name:  <unnamed>
+       log:  E:\STATA_IOV\IOV.log
+  log type:  text
+ closed on:  12 Sep 2021, 10:41:30
+-------------------------------------------------------------------------------

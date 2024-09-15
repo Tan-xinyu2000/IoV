@@ -1,0 +1,15 @@
+-------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  E:\STATA_IOV\IOV2.log
+  log type:  text
+ opened on:  12 Sep 2021, 10:41:41
+
+. 
+end of do-file
+
+.  do "C:\Users\TANXIN~1\AppData\Local\Temp\STD1304_000000.tmp"
+
+. asdoc sw reg drivingscore ranking alert age gender accident drivingexp gcons 
+> totalm Speed_KMH rapid_acc rapid_deacc sharp_turn fatigdriving nightdriving a
+> pp_usage log_time_1 log_acc_1 log_deacc_1 log_turn_1 log_ndri_1, pe(0.05)
+(File Myfile.doc already exists, option append was assumed)

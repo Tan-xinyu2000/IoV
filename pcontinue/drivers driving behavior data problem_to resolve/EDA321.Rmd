@@ -1,0 +1,65 @@
+---
+title: "EDA321"
+author: "谭昕煜"
+date: "2021/3/21"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+ library(vroom)
+    library(tidyverse)
+    library(janitor)
+    library(lubridate)
+    library(scales)
+    
+    
+    Drive <- vroom("eng317.csv")
+    
+    factors <- c("group", "ranking", "alert", "gender","accident", "group", "app_usage")
+    numerics <- c("log_co2_1", "log_acc_1", "log_gasoline_1", "log_deacc_1")
+    
+    Drive_clean <- Drive %>%
+        janitor::clean_names() %>%# get rid of some `` and underscore problems
+        rename(license = license_plate_number) %>% 
+        mutate(license = na_if(license, "1.22E+16"),
+               log_co2_1 = na_if(log_co2_1, "#NULL!"),
+               log_acc_1 = na_if(log_acc_1, "#NULL!"),
+               log_gasoline_1 = na_if(log_gasoline_1, "#NULL!"),
+               log_deacc_1 = na_if(log_deacc_1, "#NULL!")) %>%
+        filter(!is.na(license)) %>% # without license plate no car identifier
+        transform(driver_id = as.numeric(factor(license))) %>% # add id column
+        mutate(group = str_extract(group, '(?<=^.{1}).')) %>%
+        mutate(date = lubridate::mdy(date)) %>% # convert to Date type
+        mutate(across(all_of(factors), as.factor)) %>%
+        mutate(across(all_of(numerics), as.numeric)) %>%
+        relocate(where(is.numeric), .after = where(is.character)) %>%
+        relocate(starts_with("log"), .after = last_col()) %>%
+        relocate(driver_id, .before = 1) %>%
+        relocate(driving_score, .before = 2) %>% # research focus near the front
+        relocate(date, .after = 2) %>%
+        relocate(app_usage, .before = 2) # dependent variable at the front
+    
+    Drive_Anhui <- Drive_clean %>%
+        filter(str_detect(license, "皖"))
+    
+    plotly::ggplotly( # For some reasons doesn't knit, but executes fine
+        Drive_Anhui %>%
+            filter(mileage > 0) %>%
+            select(license, rapid_acceleration, rapid_deacceleration, date) %>%
+            mutate(month = month(date)) %>%
+            group_by(license) %>%
+            filter(n() > 50 & rapid_acceleration < 500) %>%
+            # at least 30 data points over the year
+            ggplot(aes(x=rapid_acceleration, y=rapid_deacceleration)) +
+            geom_point(mapping = aes(color = month))  +
+            geom_smooth(method = "gam", formula = y ~ s(x, bs = "cs")) +
+            facet_wrap(~license) +
+            ggtitle("Threshold-measurement based profiling: Acceleration vs Deacceleration") +
+            xlab("Rapid acceleration penalty count") +
+            ylab("Rapid deacceleration penalty count")
+    )
+```
+
+## R Markdown
